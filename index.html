@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>ANPM - ANPM is Not a Password Manager</title>
+	<meta name="description" content="Generate random passwords securely for free.">
+	<meta name="author" content="Ludovic Floch">
+	<link rel="icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+	<div id="anpm">
+		<div class="container-fluid" style="background-color: #000000;padding-bottom:10px;">
+			<div class="container">
+				<div class="row" style="margin-top:10px;">
+					<div class="col-md-2">
+						<img class="visible-xs" style="float:left;max-width:80px;padding-top:15px;" src="img/logo_anpm.jpg" />
+						<img class="hidden-xs" style="float:left;max-width:130px;padding-top:15px;" src="img/logo_anpm.jpg" />
+					</div>
+					<div class="col-md-10 text-right">
+						<h1><u>A</u>NPM <br/>is <u>N</u>ot<br/> a <u>P</u>assword<br/> <u>M</u>anager</h1>
+						<br />
+						<a v-bind:href="translateLang">{{ translateToMyLanguage }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div style="margin-top:30px;">
+				<div class="form-group">
+					<label for="platformInput">1. {{ platformLabel }}</label>
+					<input class="form-control input-lg" autocomplete="off" id="platformInput" v-model="platform">
+					<span id="platformHelp" class="help-block">{{ platformHelp }}</span>
+				</div>
+				<div class="form-group" v-if="platform">
+					<label for="masterKey">2. {{ masterKeyLabel }}</label>
+					<input class="form-control input-lg" autocomplete="off" id="masterKey" type="password" v-model="masterKey">
+					<span id="masterKeyHelp" class="help-block">{{ masterKeyHelp }}</span>
+				</div>
+				<div class="form-group" v-if="masterKey">
+					<label for="pin">3. {{ pinLabel }}</label>
+					<input class="form-control input-lg" autocomplete="off" id="pin" type="password" v-model="pin">
+					<span id="pinHelp" class="help-block">{{ pinHelp }}</span>
+				</div>
+				<div v-if="password">
+					<div class="row" style="margin-top:20px;margin-bottom:20px;">
+						<div class="col-md-12">
+							<div class="input-group">
+								<span class="input-group-addon hidden-xs" id="passwordSize"><i class="fa fa-lock" aria-hidden="true"></i> {{ yourPasswordLabel }}</span>
+								<input type="password" class="form-control input-lg" id="password" v-model="password">
+								<span class="input-group-btn">
+									<button class="btn btn-success btn-lg" id="copyPasswordButton" v-on:click="copyToClipBoard"><i class="fa fa-arrow-right" aria-hidden="true"></i> {{ passwordCopy }}</button>
+								</span>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="checkboxShowPassword" v-model="showPassword"> {{ showPasswordLabel }}
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<fieldset class="col-md-6">    	
+							<legend>Options</legend>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="checkboxWithoutSpecialCharacters" v-model="withoutSpecialCharacters"> {{ withoutSpecialCharactersLabel }}
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="checkboxlowerCasePassword" v-model="lowerCasePassword"> {{ lowerCasePasswordLabel }}
+								</label>
+							</div>
+							<div class="form-group">
+								<label for="pin">{{ passwordSizeLabel }}</label>
+								<input class="form-control input-lg" autocomplete="off" id="pin" type="number" v-model="passwordSize">
+							</div>
+						</fieldset>
+						<div class="col-md-6">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<p>Fait avec beaucoup d'amour en France</p>
+				<p>Ludovic Floch - Août 2017</p>
+			</div>
+		</div>
+	</div>
+	<script src="bower_components/vue/dist/vue.min.js"></script>
+	<script src="bower_components/polyglot/build/polyglot.min.js"></script>
+	<script src="bower_components/crypto-js/crypto-js.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>
