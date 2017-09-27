@@ -3,6 +3,8 @@ Fast, free and secure passwords generator.
 
 Generate a password is a pain. Two main options for us, use the same password everywhere or generate random passwords that we forget as fast as we generate them.
 
+First, you can watch this [super funny video](https://www.youtube.com/watch?v=2tJ-NSPES9Y) about passwords ;-) 
+
 ANPM allow you to freely generate secure passwords that you'll never forget again.
 
 ## 1. Tell to ANPM for wich platform you want to generate the password.
